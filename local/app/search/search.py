@@ -25,6 +25,11 @@ class CacheClient:
     def simulate_searches(self, n_searches=100):
         keys_to_search = [f"{i}" for i in np.random.randint(1, 101, n_searches)]
 
+        # Métricas
+        tiempo_total = 0
+        num_busquedas_json = n_searches
+        tiempo_por_busqueda = 0
+
         count = 0
         for key in keys_to_search:
             # clear console
@@ -33,15 +38,14 @@ class CacheClient:
             print(f"Searching : {count}/{n_searches}")
             start_time = time.time()
             self.get(key)
-            elapsed_time = time.time() - start_time
+            tiempo_por_busqueda = time.time() - start_time
+            tiempo_total += tiempo_por_busqueda
+            print(f"Tiempo de la búsqueda {count}: {tiempo_por_busqueda}")
 
-            if elapsed_time < 1:
-                avoided_json_lookups += 1
-
-        print(f"\nTime saved thanks to cache: {elapsed_time:.2f} seconds")
-        print(f"Number of times JSON lookup was avoided: {avoided_json_lookups}")
+        print(f"Número total de búsquedas: {num_busquedas_json}\n")
+        print(f"Tiempo total de ejecución de las búsquedas: {tiempo_total}")
+        print(f"Tiempo promedio de las búsquedas: {tiempo_total/num_busquedas_json}")
         
-
 if __name__ == '__main__':
 
     client = CacheClient()
