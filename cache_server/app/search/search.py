@@ -67,9 +67,6 @@ class CacheClient:
         self.reset_metrics()
         keys_to_search = [f"{i}" for i in np.random.randint(1, 101, n_searches)]
 
-        # Métricas
-        num_busquedas_json = n_searches
-
         count = 0
         for key in keys_to_search:
             # clear console
@@ -79,9 +76,10 @@ class CacheClient:
             start_time = time.time()
             self.get(key)
 
-        print(f"Número total de búsquedas: {num_busquedas_json}")
+        print(f"Número total de búsquedas (JSON): {self.num_busquedas_json}")
+        print(f"Número total de búsquedas (cache): {self.num_busquedas_cache}")
         print(f"Tiempo total de ejecución de las búsquedas: {self.tiempo_total}")
-        print(f"Tiempo promedio de las búsquedas: {self.tiempo_total/num_busquedas_json}")
+        print(f"Tiempo promedio de las búsquedas: {self.tiempo_total/n_searches}")
         
     def create_dataframe(self, filename=None):
       data = {
