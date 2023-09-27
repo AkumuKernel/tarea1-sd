@@ -64,10 +64,11 @@ class CacheClient:
       }
       df = pd.DataFrame(data)
 
-    if filename:
-        df.to_csv(filename, index=False)
-
-        return df
+      if filename:
+          df.to_csv(filename, index=False)
+          
+      
+      return df
 
     def generate_graphic(self):
      if len(self.tiempo_de_busqueda) > 10:
