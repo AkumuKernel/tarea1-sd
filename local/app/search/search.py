@@ -67,7 +67,7 @@ class CacheClient:
     if filename:
         df.to_csv(filename, index=False)
 
-      return df
+        return df
 
     def generate_graphic(self):
      if len(self.tiempo_de_busqueda) > 10:
